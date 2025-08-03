@@ -38,7 +38,7 @@ public class BusinessPartnerTests
         var status = typeof(BusinessPartner).GetField("_status", BindingFlags.NonPublic | BindingFlags.Instance);
         status!.SetValue(_sut, VerificationStatus.Verified);
         
-        _sut.IsEligibleForLeaseContracts().Should().BeFalse();
+        _sut.IsEligibleForLeaseContracts().Should().BeTrue();
     }
     
     [Fact]
@@ -46,40 +46,11 @@ public class BusinessPartnerTests
     {
         var random = new Random();
         var notEligibleStatuses = Enum.GetValues<VerificationStatus>().Where(x => x != VerificationStatus.Verified).ToList();
-        var notEligibleStatus = (VerificationStatus)notEligibleStatuses[random.Next(notEligibleStatuses.Count)];
+        var notEligibleStatus = notEligibleStatuses[random.Next(notEligibleStatuses.Count)];
         
         var status = typeof(BusinessPartner).GetField("_status", BindingFlags.NonPublic | BindingFlags.Instance);
         status!.SetValue(_sut, notEligibleStatus);
         
         _sut.IsEligibleForLeaseContracts().Should().BeFalse();
     }
-    
-    
-    
-    // [Fact]
-    // public void IsEligibleForLeaseContracts_NewBusinessPartner_ReturnsFalse()
-    // {
-    //     //Arrange
-    //     var partner = new BusinessPartner();
-    //
-    //     //Act
-    //     var actual = partner.IsEligibleForLeaseContracts();
-    //
-    //     //Assert
-    //     Assert.False(actual);
-    // }
-    //
-    // [Fact]
-    // public void IsEligibleForLeaseContracts_VerifiedBusinessPartner_ReturnsFalse()
-    // {
-    //     //Arrange
-    //     var partner = new BusinessPartner();
-    //     partner.Verify();
-    //
-    //     //Act
-    //     var actual = partner.IsEligibleForLeaseContracts();
-    //
-    //     //Assert
-    //     Assert.True(actual);
-    // }
 }

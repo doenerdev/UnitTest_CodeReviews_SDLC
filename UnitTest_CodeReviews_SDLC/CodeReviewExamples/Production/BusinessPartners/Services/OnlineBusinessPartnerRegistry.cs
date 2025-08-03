@@ -5,9 +5,18 @@ namespace CodeReviewExamples.Production.BusinessPartners.Services;
 /// </summary>
 public class OnlineBusinessPartnerRegistry : IBusinessPartnerRegistry
 {
-    public Task<bool> TryGetBusinessPartnerByCodeAsync(int partnerCode, out RegisteredBusinessPartnerDto registeredBusinessPartner)
+    //sample implementation...
+    private readonly Dictionary<int, RegisteredBusinessPartnerDto> _businessPartnerOnlineRegistry =
+        new()
+        {
+            { 1234, new RegisteredBusinessPartnerDto { PartnerCode = 1234, Origin = RegistryOrigin.Online } }
+        };
+    
+    public virtual Task<bool> TryGetBusinessPartnerByCodeAsync(int partnerCode, out RegisteredBusinessPartnerDto registeredBusinessPartner)
     {
-        //sample implementation...
+        if(!_businessPartnerOnlineRegistry.TryGetValue(partnerCode, out registeredBusinessPartner))
+            return Task.FromResult(false);
+        
         registeredBusinessPartner = new RegisteredBusinessPartnerDto();
         return Task.FromResult(true);
     }

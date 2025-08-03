@@ -1,6 +1,6 @@
 namespace CodeReviewExamples.Production.BusinessPartners.Services;
 
-public class BusinessPartnerRepository(IBusinessPartnerRegistry businessPartnerRegistry, IBusinessPartnerArchive businessPartnerArchive)
+public class BusinessPartnerRepository(OnlineBusinessPartnerRegistry businessPartnerRegistry, IBusinessPartnerArchive businessPartnerArchive)
 {
     public async Task<RegisteredBusinessPartnerDto> GetBusinessPartnerByCodeAsync(int partnerCode)
     {

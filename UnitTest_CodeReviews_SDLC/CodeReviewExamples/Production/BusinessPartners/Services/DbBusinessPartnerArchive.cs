@@ -14,6 +14,12 @@ public class DbBusinessPartnerArchive : IBusinessPartnerArchive
         //sample implementation
         return Task.CompletedTask;
     }
+    
+    public Task RemoveBusinessPartnerFromArchiveAsync(int partnerCode)
+    {
+        //sample implementation
+        return Task.CompletedTask;
+    }
 
     public Task Clear()
     {
